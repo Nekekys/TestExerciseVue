@@ -1,18 +1,7 @@
 <template>
-    <div>
-        {{message}}
-    </div>
+    <router-view></router-view>
 </template>
 <script>
-const default_layout = "default";
 
-
-export default {
-    computed: {},
-    data() {
-        return {
-            message:'Hello World'
-        }
-    }
-};
+export default {};
 </script>

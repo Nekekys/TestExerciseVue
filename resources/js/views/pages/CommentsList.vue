@@ -4,22 +4,24 @@
             <Preloader/>
         </div>
         <div v-else>
-            <Comment v-for="comment in comments" :data="comment" :key="comment.id" />
+            <Comment v-for="comment in comments" :data="comment" :key="comment.id"/>
         </div>
 
         <div class="inputControl">
-            <InputUI v-model="fields.message" placeholder="Comment" />
+            <InputUI v-model="fields.message" placeholder="Comment"/>
             <date-picker :style="{width: '120px', marginLeft: '10px'}" v-model="fields.date" valueType="DD-MM-YYYY"></date-picker>
         </div>
         <div class="inputControl">
-            <InputUI v-model="fields.name" placeholder="Name" />
+            <InputUI v-model="fields.name" placeholder="Name"/>
             <ButtonUI :disable="validateFrom" @click="SubmitFrom">Send</ButtonUI>
         </div>
         <pagination class="pagination" :current-page="page" :max-pages="this.$store.getters.countComments" @change="changePage"/>
         <div class="sortGroup">
             <div>
-                <ButtonUI :disable="$store.state.isLoading" @click="SortIdAndDate">{{ sortType ? 'sort id' : 'sort date' }}</ButtonUI>
-                <ButtonUI :disable="$store.state.isLoading" @click="SortDecreasingAndIncrease">{{ checkedSort ? 'increase' : 'decreasing' }}</ButtonUI>
+                <ButtonUI :disable="$store.state.isLoading" @click="SortIdAndDate">{{ sortType ? 'sort id' : 'sort date' }}
+                </ButtonUI>
+                <ButtonUI :disable="$store.state.isLoading" @click="SortDecreasingAndIncrease">{{ checkedSort ? 'increase' : 'decreasing' }}
+                </ButtonUI>
             </div>
             <div>
                 <p>Current sort: {{sortType ? 'sort date' : 'sort id'}} / {{ checkedSort ? 'decreasing' : 'increase' }}</p>
@@ -55,7 +57,7 @@
         },
         computed: {
             comments() {
-                return this.$store.getters.getComments.filter( (e, index) => index >= (this.page - 1) * 3 && index < (this.page) * 3)
+                return this.$store.getters.getComments.filter((e, index) => index >= (this.page - 1) * 3 && index < (this.page) * 3)
             },
             validateFrom() {
                 return this.fields.message.length === 0 || this.fields.name.length === 0
@@ -87,25 +89,25 @@
             changePage(page) {
                 this.page = page
             },
-            SortIdAndDate(){
+            SortIdAndDate() {
                 this.sortType = !this.sortType
                 this.sort()
             },
-            SortDecreasingAndIncrease(){
+            SortDecreasingAndIncrease() {
                 this.checkedSort = !this.checkedSort
                 this.sort()
             },
-            sort(){
-                if(!this.sortType){
-                    if(this.checkedSort){
+            sort() {
+                if (!this.sortType) {
+                    if (this.checkedSort) {
                         this.$store.commit('sortIdDecreasing')
-                    }else {
+                    } else {
                         this.$store.commit('sortIdIncrease')
                     }
-                }else {
-                    if(this.checkedSort){
+                } else {
+                    if (this.checkedSort) {
                         this.$store.commit('sortDateDecreasing')
-                    }else {
+                    } else {
                         this.$store.commit('sortDateIncrease')
                     }
                 }
@@ -116,8 +118,8 @@
         },
         watch: {
             '$store.state.isLoading': {
-                handler(val){
-                    if(!val) this.sort()
+                handler(val) {
+                    if (!val) this.sort()
                 },
             }
         }
@@ -125,27 +127,31 @@
 </script>
 
 <style scoped>
-    .inputControl{
+    .inputControl {
         display: flex;
         flex-direction: row;
         align-items: center;
         justify-content: space-between;
         margin-top: 10px;
     }
-    .preloader{
+
+    .preloader {
         display: flex;
         align-items: center;
         justify-content: center;
         margin-bottom: 15px;
     }
-    .sortGroup{
+
+    .sortGroup {
         margin-top: 10px;
     }
-    .pagination{
+
+    .pagination {
         margin-top: 10px;
     }
+
     @media screen and (max-width: 500px) {
-        .inputControl input{
+        .inputControl input {
             max-width: 100px;
         }
     }

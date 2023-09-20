@@ -1,5 +1,11 @@
 <template>
-    <input :value="value" @input=" e => $emit('input', e.target.value)" class="input" type="text" :placeholder="placeholder" />
+    <input
+        :value="value"
+        @input=" e => $emit('input', e.target.value)"
+        :placeholder="placeholder"
+        class="input"
+        type="text"
+    />
 </template>
 
 <script>
@@ -19,9 +25,9 @@
 </script>
 
 <style scoped>
-    .input{
+    .input {
         font-size: 16px;
-        border: 2px solid  #999999;
+        border: 2px solid #999999;
         background-color: transparent;
         border-radius: 8px;
         color: #fff;

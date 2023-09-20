@@ -1,7 +1,7 @@
 <template>
     <div class="container" :class="{isSolo: 'isSolo'}">
         <div v-if="isLoading" class="preloader">
-            <Preloader />
+            <Preloader/>
         </div>
         <div v-else @click="currentComment">
             <div class="name">
@@ -23,7 +23,7 @@
 
     export default {
         name: "Comment",
-        components: {ButtonUI,Preloader},
+        components: {ButtonUI, Preloader},
         props: {
             data: {
                 type: Object
@@ -41,35 +41,35 @@
             }
         },
         methods: {
-            async editOrSave(){
-                if (this.isEdit){
+            async editOrSave() {
+                if (this.isEdit) {
                     this.isLoading = true
-                    const { data } = await this.axios.patch(`/api/comments/${this.$props.data.id}`, {text: this.field}).catch()
+                    const {data} = await this.axios.patch(`/api/comments/${this.$props.data.id}`, {text: this.field}).catch()
                     if (data) {
                         this.$store.commit('updateComment', {text: this.field, id: this.$props.data.id})
                     }
                     // this.$store.dispatch('updateComment', {update: {text: this.field, id: this.$props.data.id}, ctx: this})
                     this.isEdit = false
                     this.isLoading = false
-                }else {
+                } else {
                     this.isEdit = true
                 }
             },
-            deleted(){
+            deleted() {
                 this.isLoading = true
                 this.$store.dispatch('delComment', {id: this.$props.data.id, ctx: this})
             },
-            currentComment(){
-                if( !this.isSolo ) this.$router.push(`/comment/${this.$props.data.id}`)
+            currentComment() {
+                if (!this.isSolo) this.$router.push(`/comment/${this.$props.data.id}`)
             }
         }
     }
 </script>
 
 <style scoped>
-    .container{
+    .container {
         max-width: 600px;
-        border: 2px solid  #999999;
+        border: 2px solid #999999;
         border-radius: 8px;
         color: #fff;
         padding: 10px;
@@ -79,25 +79,31 @@
         min-width: 250px;
         cursor: pointer;
     }
-    .container:hover{
-        background-color: rgba(0,0,0,0.5);
+
+    .container:hover {
+        background-color: rgba(0, 0, 0, 0.5);
     }
-    .isSolo:hover{
-        background-color: rgba(0,0,0,0);
+
+    .isSolo:hover {
+        background-color: rgba(0, 0, 0, 0);
     }
-    .name{
+
+    .name {
         display: flex;
         align-items: center;
         justify-content: space-between;
     }
-    .name h4{
+
+    .name h4 {
         margin: 0;
         min-width: 100px;
     }
-    .name span{
+
+    .name span {
         margin-left: 10px;
     }
-    .textarea{
+
+    .textarea {
         background-color: transparent;
         width: 100%;
         border: none;
@@ -105,7 +111,8 @@
         font-size: 16px;
         outline: none;
     }
-    .preloader{
+
+    .preloader {
         display: flex;
         align-items: center;
         justify-content: center;

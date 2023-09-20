@@ -3,7 +3,7 @@
         <Preloader/>
     </div>
     <div v-else>
-        <Comment :data="this.$store.state.comment" :key="this.$store.state.comment.id" isSolo />
+        <Comment :data="this.$store.state.comment" :key="this.$store.state.comment.id" isSolo/>
         <ButtonUI @click="goHome">Back</ButtonUI>
     </div>
 </template>
@@ -20,7 +20,7 @@
             this.$store.dispatch('getCurrentComment', {id: this.$route.params.id, ctx: this})
         },
         methods: {
-            goHome(){
+            goHome() {
                 this.$router.push('/')
             }
         }
